@@ -1,4 +1,6 @@
 [core]
-    remote = driver1g_mu7y6i-vmwelmoxjavhqe--llmd3pgemote
+    remote = myremote
 ['remote "driver1g_mu7y6i-vmwelmoxjavhqe--llmd3pgemote"']
     url = gdrive://
+['remote "myremote"']
+    url = gdrive://1G_mU7Y6i-vmwELMoXjaVhqE--lLMD3PG
