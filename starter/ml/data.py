@@ -1,6 +1,19 @@
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
+def clean_dataset(df):
+    """
+    Clean the dataset
+    """
+    print(df.columns)
+    df.replace({'?': None}, inplace=True)
+    df.dropna(inplace=True)
+    df.drop_duplicates(inplace=True)
+    df.drop(["education-num","capital-gain","capital-loss"], axis=1, inplace=True)
+    return df
 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
