@@ -14,6 +14,15 @@ def clean_dataset(df):
     df.drop_duplicates(inplace=True)
     df.drop(["education-num","capital-gain","capital-loss"], axis=1, inplace=True)
     return df
+    
+def data_cleaning_stage(root_path):
+    """
+    data cleaning stage
+    """
+
+    df = pd.read_csv(f"{root_path}/data/census.csv", skipinitialspace=True)
+    df = clean_dataset(df)
+    df.to_csv(f"{root_path}/data/clean_census.csv", index=False)
 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
