@@ -1,8 +1,9 @@
 import numpy as np
-from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 import numpy as np
 import pandas as pd
+import hydra
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+
 
 def clean_dataset(df):
     """
@@ -90,3 +91,11 @@ def process_data(
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
+    
+    
+    
+if __name__ == "__main__":
+	print("am here")
+	#root_path = hydra.utils.get_original_cwd()
+	data_cleaning_stage("/home/abey/project-deploy-ml-model-on-heroku") 	
+
