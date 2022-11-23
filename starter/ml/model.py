@@ -69,4 +69,6 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    preds = model.predict(x)
+    return preds
+    
