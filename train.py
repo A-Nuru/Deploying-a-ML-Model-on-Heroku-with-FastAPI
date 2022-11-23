@@ -9,7 +9,7 @@ _steps = [
 ]
 
 
-@hydra.main(config_name="config.yaml")
+@hydra.main(config_name="config.yaml", config_path="./")
 def go(config: DictConfig):
     """
     Run pipeline stages
