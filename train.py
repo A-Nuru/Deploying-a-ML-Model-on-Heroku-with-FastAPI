@@ -1,6 +1,7 @@
 import hydra
 import logging
 from starter.ml.data import data_cleaning_stage
+from starter.train_model import get_train_test_data
 from omegaconf import DictConfig
 
 _steps = [
@@ -8,7 +9,7 @@ _steps = [
 ]
 
 
-@hydra.main(config_name="config.yml")
+@hydra.main(config_name="config.yaml")
 def go(config: DictConfig):
     """
     Run pipeline stages
@@ -25,6 +26,9 @@ def go(config: DictConfig):
     if "data_cleaning" in active_steps:
         logging.info("Cleaning and saving clean data")
         data_cleaning_stage(root_path)
+        
+    train_df, test_df = get_train_test_data(root_path)
+    print('done')
         
 if __name__ == "__main__":
     """
