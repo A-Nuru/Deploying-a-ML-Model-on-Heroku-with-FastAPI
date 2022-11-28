@@ -72,7 +72,7 @@ def inference(model, X):
     preds = model.predict(x)
     return preds
     
- def compute_score_per_slice(trained_model, test, encoder,
+def compute_score_per_slice(trained_model, test, encoder,
                             lb, cat_features, root_path):
     """
     Compute score per category class slice
@@ -103,5 +103,5 @@ def inference(model, X):
                               "Recall: %s FBeta: %s" % (category, cls,
                                                         prc, rcl, fb)
                 logging.info(metric_info)
-                file.write(metric_info + '\n')
-    
+                file.write(metric_info + '\n') 
+                
