@@ -1,9 +1,5 @@
-import numpy as np
-import numpy as np
 import pandas as pd
-import hydra
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
-
 
 def clean_dataset(df):
     """
@@ -20,7 +16,6 @@ def data_cleaning_stage(root_path):
     """
     data cleaning stage
     """
-
     df = pd.read_csv(f"{root_path}/data/census.csv", skipinitialspace=True)
     df = clean_dataset(df)
     df.to_csv(f"{root_path}/data/clean_census.csv", index=False)
@@ -66,7 +61,6 @@ def process_data(
         Trained LabelBinarizer if training is True, otherwise returns the binarizer
         passed in.
     """
-
     if label is not None:
         y = X[label]
         X = X.drop([label], axis=1)
@@ -91,11 +85,8 @@ def process_data(
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
-    
-    
-    
+      
 if __name__ == "__main__":
-	print("am here")
-	#root_path = hydra.utils.get_original_cwd()
-	data_cleaning_stage("/home/abey/project-deploy-ml-model-on-heroku") 	
+    print("am here")
+    data_cleaning_stage("/home/abey/project-deploy-ml-model-on-heroku") 	
 

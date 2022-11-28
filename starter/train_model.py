@@ -1,9 +1,9 @@
-# Script to train machine learning model.
+"Script to train machine learning model."
 import pandas as pd
 from joblib import dump
+from sklearn.model_selection import train_test_split
 from .ml.data import process_data
 from .ml.model import train_model
-from sklearn.model_selection import train_test_split
 
 # Optional enhancement: will use K-fold cross validation instead of a train-test split later.
 def get_train_test_data(root_path):
@@ -42,13 +42,3 @@ def train_save_model(train, cat_features, root_path):
     dump(encoder, f"{root_path}/model/encoder.joblib")
     dump(lb, f"{root_path}/model/lb.joblib")
 
-cat_features = [
-    "workclass",
-    "education",
-    "marital-status",
-    "occupation",
-    "relationship",
-    "race",
-    "sex",
-    "native-country",
-]
