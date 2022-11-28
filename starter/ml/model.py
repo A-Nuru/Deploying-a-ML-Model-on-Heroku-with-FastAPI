@@ -72,3 +72,36 @@ def inference(model, X):
     preds = model.predict(x)
     return preds
     
+def compute_score_per_slice(trained_model, test, encoder,
+                            lb, cat_features, root_path):
+    """
+    Compute score per category class slice
+    Parameters
+    ----------
+    trained_model
+    test
+    encoder
+    lb
+    Returns
+    -------
+    """
+    with open(f'{root_path}/model/slice_output.txt', 'w') as file:
+        for category in cat_features:
+            for cls in test[category].unique():
+                temp_df = test[test[category] == cls]
+
+                x_test, y_test, _, _ = process_data(
+                    temp_df,
+                    categorical_features=cat_features, training=False,
+                    label="salary", encoder=encoder, lb=lb)
+
+                y_pred = trained_model.predict(x_test)
+
+                prc, rcl, fb = compute_model_metrics(y_test, y_pred)
+
+                metric_info = "[%s]-[%s] Precision: %s " \
+                              "Recall: %s FBeta: %s" % (category, cls,
+                                                        prc, rcl, fb)
+                logging.info(metric_info)
+                file.write(metric_info + '\n') 
+                
