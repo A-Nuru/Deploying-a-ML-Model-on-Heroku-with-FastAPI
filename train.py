@@ -1,11 +1,12 @@
 import hydra
 import logging
 from starter.ml.data import data_cleaning_stage
-from starter.train_model import get_train_test_data
+from starter.train_model import get_train_test_data, train_save_model
 from omegaconf import DictConfig
 
 _steps = [
     "data_cleaning",
+    "train_model"
 ]
 
 
@@ -29,7 +30,11 @@ def go(config: DictConfig):
         
     train_df, test_df = get_train_test_data(root_path)
     print('done')
-        
+    
+    if "train_model" in active_steps:
+        logging.info("Train/Test model procedure started")
+        train_save_model(train_df, cat_features, root_path)
+        print("done")
 if __name__ == "__main__":
     """
     Main entrypoint
