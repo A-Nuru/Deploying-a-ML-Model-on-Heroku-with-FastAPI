@@ -20,14 +20,4 @@ def clean_data(raw_data):
     df = clean_dataset(raw_data)
     return df
 
-@pytest.fixture
-def cat_features():
-    """
-    Get dataset
-    """
-    with open('config.yml') as f:
-        config = yaml.load(f)
-
-    return config['data']['cat_features']
-
 
