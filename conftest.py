@@ -11,3 +11,13 @@ def raw_data():
     df = pd.read_csv("data/raw/census.csv", skipinitialspace=True)
 
     return df
+    
+@pytest.fixture
+def clean_data(raw_data):
+    """
+    Get dataset
+    """
+    df = clean_dataset(raw_data)
+    return df
+
+
