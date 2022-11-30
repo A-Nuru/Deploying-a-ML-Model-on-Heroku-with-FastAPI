@@ -37,5 +37,14 @@ def train_data(clean_data):
     Get dataset
     """
     df = clean_data.drop('salary', axis=1)
-    return df    
+    return df
+    
+@pytest.fixture
+def test_data(clean_data):
+    """
+    Get dataset
+    """
+    df = clean_data['salary']
+    return df
+    
 
