@@ -27,7 +27,7 @@ def cat_features():
     Get dataset
     """
     with open('config.yaml') as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.FullLoader)
 
     return config['data']['cat_features']
     
