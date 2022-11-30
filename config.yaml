@@ -15,7 +15,7 @@ data:
       "native-country",
   ]
   
-  infer:
+infer:
   update_keys:
     [
       ["marital-status","marital_status"],
