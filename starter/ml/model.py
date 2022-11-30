@@ -69,7 +69,7 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    preds = model.predict(x)
+    preds = model.predict(X)
     return preds
     
 def compute_score_per_slice(trained_model, test, encoder,
