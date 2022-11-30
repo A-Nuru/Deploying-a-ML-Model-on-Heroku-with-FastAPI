@@ -42,3 +42,8 @@ def test_run_inference_high(inference_data_high, cat_features):
 
     assert prediction == ">50K"
 
+def test_get(client):
+    r = client.get("/")
+    assert r.status_code == 200
+    assert r.json() == {"greeting": "Hello!"}
+
