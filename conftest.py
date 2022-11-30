@@ -31,3 +31,11 @@ def cat_features():
 
     return config['data']['cat_features']
     
+@pytest.fixture
+def train_data(clean_data):
+    """
+    Get dataset
+    """
+    df = clean_data.drop('salary', axis=1)
+    return df    
+
