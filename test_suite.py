@@ -2,6 +2,7 @@ import os
 from starter.ml.data import data_cleaning_stage
 from starter.train_model import get_train_test_data, train_save_model
 from starter.validate_model import val_model
+from starter.inference_model import run_inference
 
 def test_clean_data():
     data_cleaning_stage(root_path='./')
@@ -22,11 +23,22 @@ def test_train_save_model(clean_data, cat_features):
     train_save_model(clean_data, cat_features, root_path='./')
 
     assert os.path.isfile("./model/model.joblib")
-    #assert os.path.isfile("./model/encoder.joblib")
-    #assert os.path.isfile("./model/lb.joblib")
+    assert os.path.isfile("./model/encoder.joblib")
+    assert os.path.isfile("./model/lb.joblib")
     
 def test_model(clean_data, cat_features):
     val_model(clean_data, cat_features, root_dir='./')
 
     assert os.path.isfile("./model/slice_output.txt")
+    
+def test_run_inference_low(inference_data_low, cat_features):
+    prediction = run_inference(inference_data_low, cat_features)
+
+    assert prediction == "<=50K"
+
+
+def test_run_inference_high(inference_data_high, cat_features):
+    prediction = run_inference(inference_data_high, cat_features)
+
+    assert prediction == ">50K"
 
