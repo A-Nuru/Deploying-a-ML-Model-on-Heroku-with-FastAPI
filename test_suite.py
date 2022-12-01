@@ -78,4 +78,18 @@ def test_post_low(client):
                                      })
     assert request.status_code == 200
     assert request.json() == {"prediction": "<=50K"}
-    
+
+def test_post_malformed(client):
+    r = client.post("/", json={
+        "age": "",
+        "workclass": "Private",
+        'fnlgt': 149184,
+        "education": "Some-college",
+        "maritalStatus": "",
+        "occupation": "",
+        "race": "Black",
+        "sex": "Male",
+        "hoursPerWeek": 60,
+        "nativeCountry": "United-States"
+    })
+    assert r.status_code == 422    
