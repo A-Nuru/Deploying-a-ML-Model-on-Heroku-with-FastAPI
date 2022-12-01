@@ -93,5 +93,4 @@ def client():
     """
     api_client = TestClient(app)
     return api_client
-    
 
