@@ -10,3 +10,4 @@ pyyaml
 Hydra-Core
 omegaconf~=2.1.1
 setuptools~=58.0.4
+dvc_gdrive
