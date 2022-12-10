@@ -48,7 +48,7 @@ def test_get(client):
     assert r.json() == {"greeting": "Hello!"}
     
 def test_post_high(client):
-    request = client.post("/", json={'age': 33,
+    request = client.post("/inference", json={'age': 33,
                                      'workclass': 'Private',
                                      'fnlgt': 149184,
                                      'education': 'HS-grad',
@@ -64,7 +64,7 @@ def test_post_high(client):
     assert request.json() == {"prediction": ">50K"}
     
 def test_post_low(client):
-    request = client.post("/", json={'age': 19,
+    request = client.post("/inference", json={'age': 19,
                                      'workclass': 'Private',
                                      'fnlgt': 149184,
                                      'education': 'HS-grad',
@@ -80,7 +80,7 @@ def test_post_low(client):
     assert request.json() == {"prediction": "<=50K"}
 
 def test_post_malformed(client):
-    r = client.post("/", json={
+    r = client.post("/inference", json={
         "age": "",
         "workclass": "Private",
         'fnlgt': 149184,
