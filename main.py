@@ -1,5 +1,6 @@
 import os
 import yaml
+import uvicorn
 from fastapi import FastAPI
 from pandas import DataFrame
 from schema import ModelInput
@@ -38,3 +39,7 @@ async def inference(input_data: ModelInput):
     prediction = run_inference(input_df, cat_features)
 
     return {"prediction": prediction}
+        
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+     
