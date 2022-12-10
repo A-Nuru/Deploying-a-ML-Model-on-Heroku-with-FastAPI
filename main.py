@@ -20,18 +20,18 @@ app = FastAPI()
 async def get_items():
     return {"greeting": "Hello!"}
         
-@app.post("/")
+@app.post("/inference")
 async def inference(input_data: ModelInput):
 
     input_data = input_data.dict()
-
+    print(input_data)
     change_keys = config['infer']['update_keys']
     columns = config['infer']['columns']
     cat_features = config['data']['cat_features']
 
     for new_key, old_key in change_keys:
         input_data[new_key] = input_data.pop(old_key)
-
+    print(input_data)
     input_df = DataFrame(data=input_data.values(), index=input_data.keys()).T
     input_df = input_df[columns]
 
