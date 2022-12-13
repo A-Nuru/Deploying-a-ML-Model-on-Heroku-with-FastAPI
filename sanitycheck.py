@@ -1,3 +1,4 @@
+# pylint: disable=W,C,R
 from os import path
 
 import argparse
