@@ -4,20 +4,20 @@ Heroku Api test script
 import requests
 
 data = {
-            'age': 19,
-            'workclass': 'Private',
-            'fnlgt': 149184,
+            'age': 52,
+            'workclass': 'Self-emp-not-inc',
+            'fnlgt': 209642,
             'education': 'HS-grad',
-            'marital_status': 'Never-married',
-            'occupation': 'Prof-specialty',
-            'relationship': 'Not-in-family',
+            'marital_status': 'Married-civ-spouse',
+            'occupation': 'Exec-managerial',
+            'relationship': 'Husband',
             'race': 'White',
             'sex': 'Male',
-            'hoursPerWeek': 60,
+            'hoursPerWeek': 45,
             'nativeCountry': 'United-States'
     }
 
-r = requests.post('https://salary-classn-app.herokuapp.com/', json=data)
+r = requests.post('https://salaryclassapp.herokuapp.com/', json=data)
 
 assert r.status_code == 200
 
