@@ -15,9 +15,6 @@ Working in a command line environment is recommended for ease of use with git an
 ## Set up S3
 
 * In your CLI environment install the<a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html" target="_blank"> AWS CLI tool</a>.
-* In the navigation bar in the Udacity classroom select **Open AWS Gateway** and then click **Open AWS Console**. You will not need the AWS Access Key ID or Secret Access Key provided here.
-* From the Services drop down select S3 and then click Create bucket.
-* Give your bucket a name, the rest of the options can remain at their default.
 
 To use your new S3 bucket from the AWS CLI you will need to create an IAM user with the appropriate permissions. The full instructions can be found <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console" target="_blank">here</a>, what follows is a paraphrasing:
 
@@ -38,7 +35,7 @@ To use your new S3 bucket from the AWS CLI you will need to create an IAM user w
 
 ## Data
 
-* Download census.csv from the data folder in the starter repository.
+* Download census.csv <a href="https://archive.ics.uci.edu/ml/datasets/census+income" target="_blank">here</a>.
    * Information on the dataset can be found <a href="https://archive.ics.uci.edu/ml/datasets/census+income" target="_blank">here</a>.
 * Create a remote DVC remote pointing to your S3 bucket and commit the data.
 * This data is messy, try to open it in pandas and see what you get.
@@ -47,11 +44,11 @@ To use your new S3 bucket from the AWS CLI you will need to create an IAM user w
 
 ## Model
 
-* Using the starter code, write a machine learning model that trains on the clean data and saves the model. Complete any function that has been started.
+* Write a machine learning model that trains on the clean data and saves the model.
 * Write unit tests for at least 3 functions in the model code.
 * Write a function that outputs the performance of the model on slices of the data.
-   * Suggestion: for simplicity, the function can just output the performance on slices of just the categorical features.
-* Write a model card using the provided template.
+   * The function can just output the performance on slices of just the categorical features.
+* Write a model card.
 
 ## API Creation
 
