@@ -3,7 +3,7 @@ from .ml.data import process_data
 from .ml.model import inference
 
 
-def run_inference(data, cat_features):
+def run_inference(data, cat_features, root_dir):
     """
     Load model and run inference
     Parameters
@@ -15,16 +15,22 @@ def run_inference(data, cat_features):
     -------
     prediction
     """
-    model = load("model/model.joblib")
+    """model = load("model/model.joblib")
     encoder = load("model/encoder.joblib")
-    lb = load("model/lb.joblib")
+    lb = load("model/lb.joblib")"""
+    
+    trained_model = load(f"{root_dir}/model/model.joblib")
+    encoder = load(f"{root_dir}/model/encoder.joblib")
+    lb = load(f"{root_dir}/model/lb.joblib")
 
-    X, _, _, _ = process_data(
+    X,_, _, _ = process_data(
         data,
         categorical_features=cat_features,
         encoder=encoder, lb=lb, training=False)
 
-    pred = inference(model, X)
+    pred = inference(trained_model, X)
     prediction = lb.inverse_transform(pred)[0]
+    print(pred)
+    print(prediction)
 
     return prediction
