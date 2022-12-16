@@ -13,7 +13,6 @@ _steps = [
     "data_cleaning",
     "train_model",
     "check_score",
-    "inference"
     ]
 
 @hydra.main(config_name="config.yaml", config_path="./")
@@ -42,10 +41,7 @@ def go(config: DictConfig):
         logging.info("Score check procedure started")
         val_model(test_df, cat_features, root_path)
         print("done")
-    if "inference" in active_steps:    
-        logging.info("Batch inference procedure started") 
-        run_inference(test_df, cat_features, root_path)
-    
+       
 if __name__ == "__main__":
     """
     Main entrypoint
