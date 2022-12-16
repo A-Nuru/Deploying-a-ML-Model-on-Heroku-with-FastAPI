@@ -1,4 +1,6 @@
-"Script to train machine learning model."
+"""Main Script to train machine learning model - 
+Process data, train and save ml model
+"""
 import pandas as pd
 from joblib import dump
 from sklearn.model_selection import train_test_split
