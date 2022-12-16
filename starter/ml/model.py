@@ -1,3 +1,7 @@
+"""
+File containing the funtions to train model, compute overall metrics, write overall metrics, do inference, and compute slice metrics
+"""
+
 import logging
 from numpy import mean
 from numpy import std
@@ -11,7 +15,6 @@ from .data import process_data
 def train_model(X_train, y_train):
     """
     Trains a machine learning model and returns it.
-
     Inputs
     ------
     X_train : np.array
@@ -20,10 +23,9 @@ def train_model(X_train, y_train):
         Labels.
     Returns
     -------
-    model
+    model:
         Trained machine learning model.
     """
-
     cv = StratifiedKFold(n_splits=10, shuffle=True, random_state=1)
     model = RandomForestClassifier(n_estimators=100)
     model.fit(X_train, y_train)
@@ -32,11 +34,9 @@ def train_model(X_train, y_train):
     logging.info('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
     return model
 
-
 def compute_model_metrics(y, preds):
     """
     Validates the trained machine learning model using precision, recall, and F1.
-
     Inputs
     ------
     y : np.array
@@ -52,13 +52,30 @@ def compute_model_metrics(y, preds):
     fbeta = fbeta_score(y, preds, beta=1, zero_division=1)
     precision = precision_score(y, preds, zero_division=1)
     recall = recall_score(y, preds, zero_division=1)
-    logging.info('Overall test performance, fbeta is :%.3f, precision is: %.3f, recall is: %.3f' % (fbeta, precision, recall))
     return precision, recall, fbeta
 
+def write_model_metrics(trained_model, test, encoder,
+                            lb, cat_features, root_path):
+    """
+    Write overall model score to a file
+    Input: trained_model, test, encoder, lb, cat_features, root_path
+    Returns: None
+    -------
+    """
+    with open(f'{root_path}/model/overall_metric_output.txt', 'w') as file:
+        x_test, y_test, _, _ = process_data(
+                    test,
+                    categorical_features=cat_features, training=False,
+                    label="salary", encoder=encoder, lb=lb)
+        y_pred = trained_model.predict(x_test)
+        prc, rcl, fb = compute_model_metrics(y_test, y_pred)
+        overall_metric_info = "Overall performance - Precision: %s " \
+                              "Recall: %s FBeta: %s" % (prc, rcl, fb)
+        logging.info(overall_metric_info)
+        file.write(overall_metric_info + '\n')  
 
 def inference(model, X):
     """ Run model inferences and return the predictions.
-
     Inputs
     ------
     model : ???
@@ -79,11 +96,8 @@ def compute_score_per_slice(trained_model, test, encoder,
     Compute score per category class slice
     Parameters
     ----------
-    trained_model
-    test
-    encoder
-    lb
-    Returns
+    Input: trained_model, test, encoder, lb, cat_features, root_path
+    Returns: None
     -------
     """
     with open(f'{root_path}/model/slice_output.txt', 'w') as file:
@@ -95,7 +109,6 @@ def compute_score_per_slice(trained_model, test, encoder,
                     temp_df,
                     categorical_features=cat_features, training=False,
                     label="salary", encoder=encoder, lb=lb)
-
                 y_pred = trained_model.predict(x_test)
 
                 prc, rcl, fb = compute_model_metrics(y_test, y_pred)
