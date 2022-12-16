@@ -1,3 +1,6 @@
+"""
+Contains a function to validate the model
+"""
 import logging
 from joblib import load
 from .ml.model import compute_score_per_slice, write_model_metrics
@@ -8,6 +11,7 @@ from starter.inference_model import run_inference
 
 def val_model(test_df, cat_features, root_dir):
     """
+    Validate the model overall and in slices
     Parameters
     ----------
     test_df
